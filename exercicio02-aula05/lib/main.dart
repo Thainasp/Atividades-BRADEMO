@@ -23,7 +23,7 @@ Future<String> sayGoodbye() async {
     final result = await logoutUser();
     return '$result Thanks, see you next time';
   } catch (_) {
-    return 'Falha ao encerrar a sessão. Tente novamente mais tarde.';
+    return 'Erro ao encerrar a sessão. Tente novamente mais tarde.';
   }
 }
 

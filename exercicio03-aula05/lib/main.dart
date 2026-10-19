@@ -48,7 +48,7 @@ class PostService {
           .map((item) => Post.fromJson(item as Map<String, dynamic>))
           .toList();
     } else {
-      throw Exception('Falha ao carregar posts: Código ${response.statusCode}');
+      throw Exception('Erro ao carregar posts: Código ${response.statusCode}');
     }
   }
 
@@ -59,7 +59,7 @@ class PostService {
     if (response.statusCode == 200) {
       return Post.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     } else {
-      throw Exception('Falha ao encontrar post #$id: Código ${response.statusCode}');
+      throw Exception('Erro ao encontrar post #$id: Código ${response.statusCode}');
     }
   }
 
@@ -74,7 +74,7 @@ class PostService {
     if (response.statusCode == 201) {
       return Post.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     } else {
-      throw Exception('Falha ao criar post: Código ${response.statusCode}');
+      throw Exception('Erro ao criar post: Código ${response.statusCode}');
     }
   }
 
@@ -89,7 +89,7 @@ class PostService {
     if (response.statusCode == 200) {
       return Post.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
     } else {
-      throw Exception('Falha ao atualizar post: Código ${response.statusCode}');
+      throw Exception('Erro ao atualizar post: Código ${response.statusCode}');
     }
   }
 
@@ -98,7 +98,7 @@ class PostService {
     final response = await http.delete(uri, headers: _headers);
 
     if (response.statusCode != 200) {
-      throw Exception('Falha ao eliminar post #$id: Código ${response.statusCode}');
+      throw Exception('Erro ao eliminar post #$id: Código ${response.statusCode}');
     }
   }
 }
