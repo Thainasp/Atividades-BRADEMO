@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-// ===================== MODELO =====================
 class Post {
   final int userId;
   final int id;
@@ -33,14 +32,12 @@ class Post {
       };
 }
 
-// ===================== SERVIÇO HTTP ASSÍNCRONO =====================
 class PostService {
   static const String _authority = 'jsonplaceholder.typicode.com';
   static const Map<String, String> _headers = {
     'Content-Type': 'application/json; charset=UTF-8',
   };
 
-  // GET: Obter lista de posts
   Future<List<Post>> getPosts() async {
     final uri = Uri.https(_authority, 'posts');
     final response = await http.get(uri, headers: _headers);
@@ -55,7 +52,6 @@ class PostService {
     }
   }
 
-  // GET: Obter um post por ID
   Future<Post> getPost(int id) async {
     final uri = Uri.https(_authority, 'posts/$id');
     final response = await http.get(uri, headers: _headers);
@@ -67,7 +63,6 @@ class PostService {
     }
   }
 
-  // POST: Criar novo post
   Future<Post> createPost(Post post) async {
     final uri = Uri.https(_authority, 'posts');
     final response = await http.post(
@@ -83,7 +78,6 @@ class PostService {
     }
   }
 
-  // PUT: Atualizar post existente
   Future<Post> updatePost(Post post) async {
     final uri = Uri.https(_authority, 'posts/${post.id}');
     final response = await http.put(
@@ -99,7 +93,6 @@ class PostService {
     }
   }
 
-  // DELETE: Remover post
   Future<void> deletePost(int id) async {
     final uri = Uri.https(_authority, 'posts/$id');
     final response = await http.delete(uri, headers: _headers);
@@ -110,7 +103,6 @@ class PostService {
   }
 }
 
-// ===================== INTERFACE =====================
 void main() {
   runApp(const CrudApp());
 }
@@ -226,7 +218,6 @@ class _PostsScreenState extends State<PostsScreen> {
 
     if (confirmed == true && titleController.text.isNotEmpty) {
       if (post == null) {
-        // Criar
         try {
           final newPost = await _service.createPost(
             Post(userId: 1, id: 0, title: titleController.text, body: bodyController.text),
@@ -238,7 +229,6 @@ class _PostsScreenState extends State<PostsScreen> {
           _showNotification('Erro: $e');
         }
       } else {
-        // Atualizar
         try {
           final updatedPost = await _service.updatePost(
             Post(userId: post.userId, id: post.id, title: titleController.text, body: bodyController.text),
